@@ -1,0 +1,24 @@
+{
+  "songs":[
+    {
+      "title": "Recover",
+      "artist": "Chvrches",
+      "album": "The Bones of What You Believe"
+    },
+    {
+      "title": "Elephant",
+      "artist": "Tame Impala",
+      "album": "Lonerism"
+    },
+    {
+      "title": "The View",
+      "artist": "Modest Mouse",
+      "album": "Good News for People Who Love Bad News"
+    },
+    {
+      "title": "The Suburbs",
+      "artist": "Arcade Fire",
+      "album": "The Suburbs"
+    }
+  ]
+}
