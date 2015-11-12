@@ -1,16 +1,19 @@
 {
   "songs": [
     {
+      "id": 1,
       "title": "The Trapeze Swinger",
       "artist": "Iron & Wine",
       "album": "Around the Well"
     },
     {
+      "id": 2,
       "title": "High and Dry",
       "artist": "Radiohead",
       "album": "The Bends"
     },
     {
+      "id": 3,
       "title": "Dark Blue",
       "artist": "Arcade Fire",
       "album": "The Suburbs"

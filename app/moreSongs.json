@@ -1,21 +1,25 @@
 {
   "songs":[
     {
+      "id": 4,
       "title": "Recover",
       "artist": "Chvrches",
       "album": "The Bones of What You Believe"
     },
     {
+      "id": 5,
       "title": "Elephant",
       "artist": "Tame Impala",
       "album": "Lonerism"
     },
     {
+      "id": 6,
       "title": "The View",
       "artist": "Modest Mouse",
       "album": "Good News for People Who Love Bad News"
     },
     {
+      "id": 7,
       "title": "The Suburbs",
       "artist": "Arcade Fire",
       "album": "The Suburbs"
