@@ -5,7 +5,9 @@
   <link rel="stylesheet" type="text/css" href="./main.css">
 </head>
 <body ng-app="MusicStudy">
-  <section ng-controller="SongDivCntl">
+<div ng-view></div>
+ <!--  <section ng-controller="SongDivCntl">
+
   <div class="flex-container">
     <div class="flex-item nav">
       <nav>
@@ -51,7 +53,7 @@
       </form>
     </div>
     <div class="flex-item song-list songs_bgrd">
-      <div ng-view></div>
+
       <div class='fun_stuff'>
       <span class='song-header'></span>
       <ul>
@@ -66,10 +68,11 @@
     </div>
     </div>
   </div>
-  </section>
+  </section> -->
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="./lib/bower_components/angular/angular.min.js"></script>
   <script src="lib/bower_components/angular-route/angular-route.js"></script>
   <script type="text/javascript" src="./app/main.js"></script>
 </body>
 </html>
+
