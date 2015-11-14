@@ -36,7 +36,7 @@ app.factory("song-service", function($http, $q){
   return {
     getSongs: getSongs,
     addSong: addSong
-    };
+  };
 }); // end of factory
 
 
