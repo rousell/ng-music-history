@@ -5,26 +5,22 @@
   <link rel="stylesheet" type="text/css" href="./main.css">
 </head>
 <body ng-app="MusicStudy">
-<div ng-view></div>
- <!--  <section ng-controller="SongDivCntl">
+  <section ng-controller="SongDivCntl">
 
   <div class="flex-container">
     <div class="flex-item nav">
       <nav>
         <ul>
-          <li>View Music |</li>
-          <li><a href="#">Add Music</a> |</li>
-          <li><a href="#">Profile</a></li>
+          <li><a href="#/songs/list">View Music</a> |</li>
+          <li><a href="#/songs/new">Add Music</a> |</li>
+          <li><a href="#/login">Log In</a> | </li>
+          <li><a href="#/login" ng-click="AuthLogout()">Log Out</a></li>
         </ul>
       </nav>
     </div>
-    <div class="flex-item control">
+<!--     <div class="flex-item control">
       <form>
         <fieldset>
-          <div>
-            <label for="song-length">Song Length:</label><br />
-            <input type="range" name="song-length" step="0.5" min="2" max="10" value="5" />
-          </div>
           <div>
             <label for="artist-list">Artist:</label><br />
             <input list="artist-list" name="artist" />
@@ -40,35 +36,18 @@
             </datalist>
           </div>
           <div>
-            <label for="genre-list">Genre:</label><br />
-            <div class="checkbox"><input type="checkbox" name="rock" value="Rock">Rock</div>
-            <div class="checkbox"><input type="checkbox" name="pop" value="Pop">Pop</div>
-            <div class="checkbox"><input type="checkbox" name="blues" value="Blues">Blues</div>
-            <div class="checkbox"><input type="checkbox" name="classical" value="Classical">Classical</div>
-            <div class="checkbox"><input type="checkbox" name="jazz" value="Jazz">Jazz</div>
-            <div class="checkbox"><input type="checkbox" name="hip-hop" value="Hip-Hop">Hip Hop</div>
+            <button type="filter">Filter</button>
           </div>
-          <button type="filter">Filter</button>
         </fieldset>
       </form>
-    </div>
+    </div> -->
     <div class="flex-item song-list songs_bgrd">
 
-      <div class='fun_stuff'>
-      <span class='song-header'></span>
-      <ul>
-      <div ng-repeat="song in songObj">
-      <h3 class='fun_stuff'><span class='song-header'>{{song.title}}</span></h3>
-        <li>{{song.artist}}</li>
-        <li>{{song.album}} <button ng-click="deleteSong(song)" class='button_delete'>Delete!</button></li>
-      </div>
-      </ul>
-      <div><button id="add_songs">More </button></div>
-      </div>
-    </div>
+      <div ng-view></div>
+
     </div>
   </div>
-  </section> -->
+  </section>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="./lib/bower_components/angular/angular.min.js"></script>
   <script type="text/javascript" src="./lib/bower_components/firebase/firebase.js"></script>
