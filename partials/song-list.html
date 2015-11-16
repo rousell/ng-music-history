@@ -1,9 +1,11 @@
 <div>
-  <input type="text" ng-model="query" />
+  Song List Filter: <input type="text" ng-model="query" />
 </div>
 
-<div ng-repeat="song in songObj | filter: query">
-  <a href="#/songs/{{ song.$id }}">{{ song.title }}</a>
+<div class='fun_stuff' ng-repeat='song in songObj | filter: query'>
+  <h3 class='fun_stuff'><a class='song-header' href="#/songs/{{ song.$id }}">{{song.title}}</a> <button ng-click="deleteSong(song)" class="button_delete">Delete!</button></h3>
+  <ul>
+    <li>{{song.artist}} | </li>
+    <li>{{song.album}}</li>
+  </ul>
 </div>
-
-<a href="#/songs/new"><button>Add New Song</button></a>

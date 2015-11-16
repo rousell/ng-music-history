@@ -1,0 +1,19 @@
+<div>
+  <form>
+  <h2>Music Study</h2>
+  <h4><a href="#/login" id="loginPage">Login</a> or Sign Up</h4>
+    <div class="form-group">
+      <label for="email_rg">Email address</label>
+      <input type="email" ng-model="email_rg" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label for="password_rg">Password</label>
+      <input type="password" ng-model="password_rg" placeholder="Password">
+    </div>
+     <div class="password_rg2">
+      <label for="passwordRegisterCheck">Confirm Password</label>
+      <input type="password" class="form-control" ng-model="password_rg2" placeholder="Re-enter Password">
+    </div>
+    <a href="#/login" ng-click="AuthRegister()"><button type="button">Register</button></a>
+  </form>
+</div>

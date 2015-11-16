@@ -1,0 +1,15 @@
+<div>
+  <form>
+  <h2>Music Study</h2>
+  <h4>Login or <a href='/register' id="registerPage">Sign Up</a></h4>
+    <div class="form-group">
+      <label for="email">Email address:</label>
+      <input type="email" ng-model="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" ng-model="password" placeholder="Password">
+    </div>
+    <a href="#/songs/list" ng-click="AuthLogin()"><button type="button">Log In</button></a>
+  </form>
+</div>
