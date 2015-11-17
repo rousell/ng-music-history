@@ -5,8 +5,7 @@
   <link rel="stylesheet" type="text/css" href="./main.css">
 </head>
 <body ng-app="MusicStudy">
-  <section ng-controller="SongDivCntl">
-
+  <section>
   <div class="flex-container">
     <div class="flex-item nav">
       <nav>
@@ -14,37 +13,12 @@
           <li><a href="#/songs/list">View Music</a> |</li>
           <li><a href="#/songs/new">Add Music</a> |</li>
           <li><a href="#/login">Log In</a> | </li>
-          <li><a href="#/login" ng-click="AuthLogout()">Log Out</a></li>
+          <li><button ng-click="authCntl.AuthLogout()">Log Out</button></li>
         </ul>
       </nav>
     </div>
-<!--     <div class="flex-item control">
-      <form>
-        <fieldset>
-          <div>
-            <label for="artist-list">Artist:</label><br />
-            <input list="artist-list" name="artist" />
-            <datalist id="artist-list">
-              <option ng-repeat="song in songObj" value="{{song.artist}}" />
-            </datalist>
-          </div>
-          <div>
-            <label for="album-list">Album:</label><br />
-            <input list="album-list" name="album" />
-            <datalist id="album-list">
-              <option ng-repeat="song in songObj" value="{{song.album}}" />
-            </datalist>
-          </div>
-          <div>
-            <button type="filter">Filter</button>
-          </div>
-        </fieldset>
-      </form>
-    </div> -->
     <div class="flex-item song-list songs_bgrd">
-
       <div ng-view></div>
-
     </div>
   </div>
   </section>

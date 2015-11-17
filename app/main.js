@@ -3,71 +3,71 @@ var app = angular.module('MusicStudy', ['firebase', 'ngRoute']);
 app.config(['$routeProvider',
   function($routeProvider){
     $routeProvider
-      .when('/login', {
+      .when('/', {
         templateUrl: 'partials/login.html',
-        controller: 'AuthCntl'
+        controller: 'AuthCntl as authCntl'
       })
-      .when('/register', {
-        templateUrl: 'partials/register.html',
-        controller: 'AuthCntl'
-      })
+      // .when('/register', {
+      //   templateUrl: 'partials/register.html',
+      //   controller: 'AuthCntl'
+      // })
       .when('/songs/list', {
         templateUrl: 'partials/song-list.html',
-        controller: 'SongDivCntl'
+        controller: 'SongDivCntl as songdiv'
       })
       .when('/songs/new', {
         templateUrl: 'partials/song-form.html',
-        controller: 'addSong'
+        controller: 'addSong as addsong'
       })
       .when('/songs/:songID', {
         templateUrl: 'partials/one-song.html',
-        controller: 'SongDetailCntl'
+        controller: 'SongDetailCntl as songdetailcntl'
       })
-      .otherwise({redirectTo: '/login'});
+      .otherwise({redirectTo: '/'});
   }]);
 
 app.controller("AuthCntl",
   [
-    "$scope",
     "$rootScope",
     "$firebaseAuth",
-    function($scope, $rootScope, $firebaseAuth) {
+    function($rootScope, $firebaseAuth) {
 
-      var ref = new Firebase("https://music-hist.firebaseio.com");
-      $scope.authObj = $firebaseAuth(ref);
+      this.AuthData = null;
+      var ref = new Firebase("https://music-hist.firebaseio.com/");
+      this.authObj = $firebaseAuth(ref);
 
-      $scope.AuthLogin = function(){
+      this.AuthLogin = function(){
         console.log("calling login");
 
-        $scope.authObj.$authWithPassword({
-          email: $scope.email,
-          password: $scope.password
+        this.authObj.$authWithPassword({
+          email: this.email,
+          password: this.password
         }).then(function(authData){
           console.log(authData);
           $rootScope.uid = authData.uid;
+          this.AuthData = authData;
           console.log("root scope uid", $rootScope.uid);
-        }).catch(function(error){
+        }.bind(this)).catch(function(error){
           console.log("Authentication Failed: ", error);
         });
       };
 
-      $scope.AuthRegister = function(){
+      this.AuthRegister = function(){
         console.log("registration called");
 
-        $scope.auth.$createUser({
-          password: $scope.password_rg,
-          email: $scope.email_rg
-        }).then(function(authData){
+        this.auth.$createUser({
+          password: this.password_rg,
+          email: this.email_rg
+        }.bind(this)).then(function(authData){
           console.log("registration = successful! ", authData);
         }).catch(function(error){
           console.log("error in creating account: ", error);
         });
       };
 
-      $scope.AuthLogout = function(){
-
+      this.AuthLogout = function(){
+        console.log("logout done!");
         ref.unauth();
-
       };
 
     }
@@ -76,61 +76,58 @@ app.controller("AuthCntl",
 
 
 app.controller("SongDivCntl",
-  // Notice the new syntax. Since I'm including one of my own dependencies
-  // then I need to include each one in array of strings (just like RequireJS)
-  // and have a matching argument in the callback function.
   [
-    "$scope",
+    "$rootScope",
     "$firebaseArray",
-    function($scope, $firebaseArray) {
+    function($rootScope, $firebaseArray) {
 
-      var ref = new Firebase("https://music-hist.firebaseio.com");
-      $scope.songObj = $firebaseArray(ref);
+      // console.log($rootScope.uid);
+      var ref = new Firebase("https://music-hist.firebaseio.com/Users/"+$rootScope.uid+"/Songs/");
+      this.songObj = $firebaseArray(ref);
     } // end of function
 ]); // end of SongDivCntl
 
 
 app.controller("addSong",
   [
-  "$scope",
+  "$rootScope",
   "$firebaseArray",
-  function($scope, $firebaseArray) {
+  function($rootScope, $firebaseArray) {
 
-    var ref = new Firebase("https://music-hist.firebaseio.com");
-    $scope.songObj = $firebaseArray(ref);
+    var ref = new Firebase("https://music-hist.firebaseio.com/Users/"+$rootScope.uid+"/Songs/");
+    this.songObj = $firebaseArray(ref);
+    console.log(authData);
 
-    var authData = $scope.authObj.$getAuth(ref);
-    $scope.newSong = {};
+    var authData = $rootScope.uid;
+    console.log("just in $rootScope authentication data ", authData);
+    this.newSong = {};
 
-    console.log("is UID here?", authData.uid);
-
-    $scope.addSong = function(){
-      $scope.songObj.$add({
-        artist: $scope.newSong.artist,
-        title: $scope.newSong.title,
-        album: $scope.newSong.album,
-      });
+    this.addSong = function(){
+      this.songObj.$add({
+        artist: this.newSong.artist,
+        title: this.newSong.title,
+        album: this.newSong.album,
+      }.bind(this));
     };
   }] // end of function
 ); // end of addSong
 
 app.controller("SongDetailCntl",
   [
-  "$scope",
   "$routeParams",
   "$firebaseArray",
-  function($scope, $routeParams, $firebaseArray) {
-    $scope.selectedSong = {};
-    $scope.songID = $routeParams.songID;
+  function($routeParams, $firebaseArray) {
+    this.selectedSong = {};
+    this.songID = $routeParams.songID;
     console.log($routeParams.songID);
 
-    var ref = new Firebase("https://music-hist.firebaseio.com");
-    $scope.songObj = $firebaseArray(ref);
+    var ref = new Firebase("https://music-hist.firebaseio.com/Users/"+$rootScope.uid+"/Songs/");
+    this.songObj = $firebaseArray(ref);
 
-    $scope.songObj.$loaded()
+    this.songObj.$loaded()
       .then(function(){
-        $scope.selectedSong = $scope.songObj.$getRecord($scope.songID);
-      })
+        this.selectedSong = this.songObj.$getRecord(this.songID);
+      }.bind(this))
       .catch(function(error){
         console.log("error: ", error);
       });
