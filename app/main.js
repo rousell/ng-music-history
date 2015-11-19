@@ -44,9 +44,7 @@ app.controller("AuthCntl",
           password: this.password
         }).then(function(authData){
           console.log(authData);
-          $rootScope.uid = authData.uid;
           this.AuthData = authData;
-          console.log("root scope uid", $rootScope.uid);
         }.bind(this)).catch(function(error){
           console.log("Authentication Failed: ", error);
         });

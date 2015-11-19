@@ -7,16 +7,6 @@
 <body ng-app="MusicStudy">
   <section>
   <div class="flex-container">
-    <div class="flex-item nav">
-      <nav>
-        <ul>
-          <li><a href="#/songs/list">View Music</a> |</li>
-          <li><a href="#/songs/new">Add Music</a> |</li>
-          <li><a href="#/login">Log In</a> | </li>
-          <li><button ng-click="authCntl.AuthLogout()">Log Out</button></li>
-        </ul>
-      </nav>
-    </div>
     <div class="flex-item song-list songs_bgrd">
       <div ng-view></div>
     </div>
