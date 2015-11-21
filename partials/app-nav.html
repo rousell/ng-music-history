@@ -1,10 +1,9 @@
 <div class="flex-item nav">
-  <nav>
+  <nav ng-controller="AuthCntl as authCntl">
     <ul>
       <li><a href="#/songs/list">View Music</a> |</li>
       <li><a href="#/songs/new">Add Music</a> |</li>
-      <li><a href="#/login">Log In</a> | </li>
-      <li><button ng-click="authCntl.AuthLogout()">Log Out</button></li>
+      <li ng-click="authCntl.AuthLogout()"><a href="#/login">Log Out</a></li>
     </ul>
   </nav>
 </div>

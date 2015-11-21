@@ -6,10 +6,17 @@
 </head>
 <body ng-app="MusicStudy">
   <section>
+  <div>
+<!--     <div ng-show="authCntl.AuthData"> -->
+      <div ng-include="'/partials/app-nav.html'"></div>
+<!--     </div> -->
+  </div>
   <div class="flex-container">
     <div class="flex-item song-list songs_bgrd">
       <div ng-view></div>
     </div>
+  </div>
+
   </div>
   </section>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>

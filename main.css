@@ -82,3 +82,7 @@ fieldset {
   border: 2px solid;
   margin: 5px;
 }
+
+.star--empty {
+  color: white;
+}

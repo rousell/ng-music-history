@@ -1,22 +1,23 @@
 <div ng-hide="authCntl.AuthData">
-  <form>
-  <h2>Music Study</h2>
-  <h4>Login or <a href='#/register'>Sign Up</a></h4>
-    <div class="form-group">
-      <label for="email">Email address:</label>
-      <input type="email" ng-model="authCntl.email" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" ng-model="authCntl.password" placeholder="Password">
-    </div>
-    <a ng-click="authCntl.AuthLogin()"><button type="button">Log In</button></a>
-  </form>
+<!--   <div class="flex-item song-list songs_bgrd"> -->
+    <form>
+    <h2>Music Study</h2>
+    <h4>Login or <a href='#/register'>Sign Up</a></h4>
+      <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" ng-model="authCntl.email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" ng-model="authCntl.password" placeholder="Password">
+      </div>
+      <a ng-click="authCntl.AuthLogin()"><button type="button">Log In</button></a>
+    </form>
+<!--   </div> -->
 </div>
 
 <div ng-show="authCntl.AuthData">
-  <div ng-include="'/partials/app-nav.html'"></div>
-  <h2>Welcome to Music Study</h2>
-  <p>Choose from the Above links for Application Views</p>
+    <h2>Welcome to Music Study</h2>
+    <p>Choose from the Above links for Application Views</p>
 </div>
 

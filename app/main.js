@@ -7,10 +7,10 @@ app.config(['$routeProvider',
         templateUrl: 'partials/login.html',
         controller: 'AuthCntl as authCntl'
       })
-      // .when('/register', {
-      //   templateUrl: 'partials/register.html',
-      //   controller: 'AuthCntl'
-      // })
+      .when('/register', {
+        templateUrl: 'partials/register.html',
+        controller: 'AuthCntl as authCntl'
+      })
       .when('/songs/list', {
         templateUrl: 'partials/song-list.html',
         controller: 'SongDivCntl as songdiv'
@@ -25,6 +25,37 @@ app.config(['$routeProvider',
       })
       .otherwise({redirectTo: '/'});
   }]);
+
+
+app.directive("songBrief",function(){
+  return {
+    restrict: 'E',
+    scope:{
+      selectedSong: "=song",
+      maxRating: "="
+    },
+    templateUrl: 'partials/brief.html',
+    link: function(scope, element, attributes){
+      function setStars(){
+        scope.stars = [];
+        var rating = parseInt(scope.selectedSong.rating);
+        for (var i = 0; i < scope.maxRating; i++) {
+          var starClass = (rating <= i) ? "star--empty" : "star--filled";
+          scope.stars.push({class: starClass});
+        }
+      }
+
+      scope.$watch('selectedSong', function(value){
+        console.log('value changed');
+        scope.selectedSong = value;
+        setStars();
+      });
+    // this.element.$loaded()
+    //   .then(function(){setStars();});
+    // }
+  }
+  };
+});
 
 app.controller("AuthCntl",
   [
@@ -45,6 +76,7 @@ app.controller("AuthCntl",
         }).then(function(authData){
           console.log(authData);
           this.AuthData = authData;
+          $rootScope.uid = authData.uid;
         }.bind(this)).catch(function(error){
           console.log("Authentication Failed: ", error);
         });
@@ -53,10 +85,11 @@ app.controller("AuthCntl",
       this.AuthRegister = function(){
         console.log("registration called");
 
-        this.auth.$createUser({
-          password: this.password_rg,
-          email: this.email_rg
-        }.bind(this)).then(function(authData){
+        console.log(this.emailrg);
+        this.authObj.$createUser({
+          email: this.emailrg,
+          password: this.passwordrg
+        }).then(function(authData){
           console.log("registration = successful! ", authData);
         }).catch(function(error){
           console.log("error in creating account: ", error);
@@ -64,8 +97,8 @@ app.controller("AuthCntl",
       };
 
       this.AuthLogout = function(){
-        console.log("logout done!");
-        ref.unauth();
+        console.log("logout clicked!");
+        this.authObj.$unauth();
       };
 
     }
@@ -82,6 +115,14 @@ app.controller("SongDivCntl",
       // console.log($rootScope.uid);
       var ref = new Firebase("https://music-hist.firebaseio.com/Users/"+$rootScope.uid+"/Songs/");
       this.songObj = $firebaseArray(ref);
+
+      this.deleteSong = function(){
+
+      };
+
+
+
+
     } // end of function
 ]); // end of SongDivCntl
 
@@ -100,12 +141,15 @@ app.controller("addSong",
     console.log("just in $rootScope authentication data ", authData);
     this.newSong = {};
 
+
     this.addSong = function(){
+      var numRating = prompt("Enter Rating for Added Song");
       this.songObj.$add({
         artist: this.newSong.artist,
         title: this.newSong.title,
         album: this.newSong.album,
-      }.bind(this));
+        rating: numRating,
+      });
     };
   }] // end of function
 ); // end of addSong
@@ -114,11 +158,12 @@ app.controller("SongDetailCntl",
   [
   "$routeParams",
   "$firebaseArray",
-  function($routeParams, $firebaseArray) {
+  "$rootScope",
+  function($routeParams, $firebaseArray, $rootScope) {
     this.selectedSong = {};
     this.songID = $routeParams.songID;
     console.log($routeParams.songID);
-
+    console.log(this);
     var ref = new Firebase("https://music-hist.firebaseio.com/Users/"+$rootScope.uid+"/Songs/");
     this.songObj = $firebaseArray(ref);
 

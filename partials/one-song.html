@@ -1,6 +1,5 @@
 <h2>{{songdetailcntl.selectedSong.title}}</h2>
-<div>By {{songdetailcntl.selectedSong.artist}}</div>
-<div>{{songdetailcntl.selectedSong.album}}</div>
+<x-song-brief song="songdetailcntl.selectedSong" max-rating="5"></x-song-brief>
 
 <a href="#/songs/list"><button>Full SongList</button></a>
 
