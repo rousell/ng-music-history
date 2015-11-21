@@ -116,12 +116,13 @@ app.controller("SongDivCntl",
       var ref = new Firebase("https://music-hist.firebaseio.com/Users/"+$rootScope.uid+"/Songs/");
       this.songObj = $firebaseArray(ref);
 
-      this.deleteSong = function(){
+      this.deleteSong = function(song){
+        var songIndex = this.songObj.indexOf(song);
 
+        if (songIndex >=0) {
+          this.songObj.$remove(songIndex);
+        }
       };
-
-
-
 
     } // end of function
 ]); // end of SongDivCntl
